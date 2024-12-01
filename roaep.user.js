@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         ROAEP counter
 // @namespace    https://lau.cat/
-// @version      1.1-br
+// @version      1.2-br
 // @description  Vote counter for ROAEP
 // @author       Lau
 // @include      https://prezenta.roaep.ro/prezidentiale*
+// @include      https://prezenta.roaep.ro/parlamentare*
 // @icon         https://prezenta.roaep.ro/prezidentiale24112024/favicon/apple-touch-icon.png
 // @downloadURL  https://raw.githubusercontent.com/Freminet/roaep/master/roaep.user.js
 // @updateURL    https://raw.githubusercontent.com/Freminet/roaep/master/roaep.user.js
@@ -26,8 +27,15 @@
             const response = await fetch('https://lau.cat/votes_details.json');
             const data = await response.json();
 
+            const isParlamentare = location.href.includes('/parlamentare');
             const isRomaniaPage = location.href.includes('/romania/');
-            const totalVotes = isRomaniaPage ? data.votesRomania : data.votesAbroad;
+
+            let totalVotes;
+            if (isParlamentare) {
+                totalVotes = data.votesParlamentare;
+            } else {
+                totalVotes = isRomaniaPage ? data.votesRomania : data.votesAbroad;
+            }
 
             let remainingVotes = totalVotes - [...document.querySelectorAll('.text-right.display-flex.flex-column')].reduce((sum, element) => {
                 const value = parseFloat(
@@ -35,6 +43,7 @@
                 );
                 return sum + value;
             }, 0);
+
 
             remainingVotes = Math.max(0, remainingVotes);
 
