@@ -44,7 +44,6 @@
                 return sum + value;
             }, 0);
 
-
             remainingVotes = Math.max(0, remainingVotes);
 
             const voturiElement = document.querySelector('#voturi');
