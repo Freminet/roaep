@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ROAEP counter
 // @namespace    https://lau.cat/
-// @version      1.2-br
+// @version      1.3-br
 // @description  Vote counter for ROAEP
 // @author       Lau
 // @include      https://prezenta.roaep.ro/prezidentiale*
