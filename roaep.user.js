@@ -24,7 +24,7 @@
 
     const updateVotes = async () => {
         try {
-            const response = await fetch('https://lau.cat/votes_details.json');
+            const response = await fetch('https://raw.githubusercontent.com/Freminet/roaep/refs/heads/main/details.json');
             const data = await response.json();
 
             const isParlamentare = location.href.includes('/parlamentare');
